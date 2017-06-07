@@ -633,28 +633,28 @@ definitions:
   sendEmail-in:
     properties:
       constante:
-        type: "string"
-        example: "2"
+        type: "integer"
+        example: 2
       idMensaje:
-        type: "string"
-        example: "316"
+        type: "integer"
+        example: 316
       correo:
         type: "string"
-        example: "rafael.sanchez@multiva.com.mx"
+        example: "string"
       nombreUsu:
         type: "string"
-        example: "rafael sanchez"       
+        example: "string"       
       fechaHora:
         type: "string"
-        example: "2" 
+        example: "string" 
 
 
 
   sendEmail-res:
     properties:
       CodigoRespuesta:
-        type: "string"
-        example: "0"
+        type: "integer"
+        example: 0
 
-#------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------- 
   
