@@ -7,7 +7,7 @@ info:
 host: "200.39.24.141"
 basePath: "/BEO"
 tags:
-- name: "Core Bancario"
+- name: ""
   description: "Grupo Financiero Multiva"
   externalDocs:
     description: "Servicios Multiva"
@@ -106,6 +106,72 @@ paths:
             
             
             
+  /CambioContrasena:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. "
+      parameters:
+      - in: "body"
+        name: "CambioContrasena"
+        description: " cambio de Contrasena"
+        required: true
+        schema:
+          $ref: "#/definitions/cambioContrasena-in"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/cambioContrasena-res"
+            
+  /ConsultaCuentasAgregadasCliente:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. "
+      operationId: "consultaCuentasAgregadasClientePOST"
+      parameters:
+      - in: "body"
+        name: "ConsultaCuentasAgregadasCliente"
+        description: " Consulta Productos Contratadose"
+        required: true
+        schema:
+          $ref: "#/definitions/consultaProductosContratados-in"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
+            
+  /EnvioNotificaciones:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. "
+      operationId: "envioNotificacionesPOST"
+      parameters:
+      - in: "body"
+        name: "EnvioNotificaciones"
+        description: " Consulta Productos Contratadose"
+        required: true
+        schema:
+          $ref: "#/definitions/envioNotificaciones-in"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/envioNotificaciones-res"
+        
+                    
+            
+            
+            
         
   /v1/consultaDatosBasicos:
     post:
@@ -197,12 +263,403 @@ paths:
           description: "Tipos de datos de respuesta"
           schema:
             $ref: "#/definitions/Validacontrato-res"
+            
+  /v1/CambioContrasena:
+    post:
+      tags:
+      - "Middleware"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. "
+      parameters:
+      - in: "body"
+        name: "CambioContrasena"
+        description: " cambio de Contrasena"
+        required: true
+        schema:
+          $ref: "#/definitions/cambioContrasena-in-v1"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/cambioContrasena-res"
+            
+  /v1/ConsultaCuentasAgregadasCliente:
+    post:
+      tags:
+      - "Middleware"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. " 
+      parameters:
+      - in: "body"
+        name: "ConsultaCuentasAgregadasCliente"
+        description: " Consulta Productos Contratadose"
+        required: true
+        schema:
+          $ref: "#/definitions/consultaProductosContratados-in-v1"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
+            
+  /v1/EnvioNotificaciones:
+    post:
+      tags:
+      - "Middleware"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. " 
+      parameters:
+      - in: "body"
+        name: "EnvioNotificaciones"
+        description: " Consulta Productos Contratadose"
+        required: true
+        schema:
+          $ref: "#/definitions/envioNotificaciones-in-v1"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/envioNotificaciones-res"
+        
+        
+  /login:
+    post:
+      tags:
+        - "LoginMiddleware"
+      description: 'Servicio que permite enviar un archivo comprimido (.ZIP) para ser persistido en base de datos'
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - name: iv-user
+          in: header
+          description: 'Nombre del usuario autenticado (numérico y tempralmete con algunos alfanuméricos)'
+          required: true
+          type: integer
+          
+        - name: iv-creds
+          in: header
+          description: 'Elemento con la representación en base64 de la credencial de usuario de TAM. Se requiere para algunas operaciones de los Servicios de Seguridad.'
+          required: true
+          type: integer
+          
+        - name: iv-groups
+          in: header
+          description: 'Lista separada por comas de los grupos de TAM/LDAP a los que pertenece el usuario.'
+          required: true
+          type: integer
+        
+        - name: numero-cliente
+          in: header
+          description: 'El dato de NumeroCliente del usuario (numero de 10 digitos).'
+          required: true
+          type: integer
+          
+        - name: nombre-completo
+          in: header
+          description: 'El dato de nombre completo del usuario. Almacenado en LDAP como el atributo CN, en el caso de Persona Física es el nombre completo, en el caso de Persona Moral se trata de la razón social.'
+          required: true
+          type: integer
+          
+        - name: tipo-authenticacion
+          in: header
+          description: 'El tipo de autenticación que se realizó con el Token. Generado por el módulo de autenticación de token, puede ser RO (ResponseOnly) o CR (Challenge/Response), dependiendo del tipo de autenticación realizado'
+          required: true
+          type: integer
+          
+        - name: contratoAceptado
+          in: header
+          description: 'El dato de primerAcceso del usuario.'
+          required: true
+          type: integer
+          
+        - name: fechaUltimoAcceso
+          in: header
+          description: 'El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server.'
+          required: true
+          type: integer
+          
+        - name: Tipocanal
+          in: header
+          description: 'El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
+        - name: mail
+          in: header
+          description: 'El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+        
+       
+      responses:
+          '200':
+            description: 'Valida la estructura del archivo que se adjunta'
+            schema:
+              $ref: '#/definitions/todo-res'
+
         
        
   
   
  
+
+  
+ 
 definitions:
+  todo-res:
+    properties:
+      ValidacontratoMiddleware:
+         type: "array"
+         items:
+          $ref: "#/definitions/consultaDatosBasicos-res"
+          
+      consultaServiciosContratados:
+         type: "array"
+         items:
+          $ref: "#/definitions/consultaServiciosContratados-res"
+          
+      consultaProductosContratados:
+         type: "array"
+         items:
+          $ref: "#/definitions/consultaProductosContratados-res"
+      
+      Validaotp:
+         type: "array"
+         items:
+          $ref: "#/definitions/Validaotp-res"
+          
+          
+      Validacontrato:
+         type: "array"
+         items:
+          $ref: "#/definitions/Validaotp-res"
+          
+
+  
+  envioNotificaciones-res:
+    properties:
+      responseStatus:
+        type: "string"
+        example: "string"
+      responseError:
+        type: "string"
+        example: "string"
+
+  envioNotificaciones-in:
+    required:
+    - "canal"
+    - "idPersona"
+    properties:
+      idPersona:
+        type: "string"
+        example: "2222"
+      ticket:
+        $ref: "#/definitions/cambioContrasenain_ticket"
+      tipoMensaje:
+        type: "string"
+        example: "mensaje"
+      tipoNotificacion:
+        type: "string"
+        example: "notificacion"
+      from:
+        type: "string"
+        example: "123"
+      to:
+        type: "string"
+        example: "321"
+      mapParameters:
+        $ref: "#/definitions/envioNotificacionesin_mapParameters"
+      canal:
+        type: "string"
+        example: "1"
+        minLength: 1
+        maxLength: 5
+        
+
+
+  envioNotificaciones-in-v1:
+    required:
+    - "canal"
+    - "idPersona"
+    - "token"
+    properties:
+      idPersona:
+        type: "string"
+        example: "123" 
+      token:
+        type: "string"
+        example: "1025478963"        
+      ticket:
+        $ref: "#/definitions/cambioContrasenain_ticket"
+      tipoMensaje:
+        type: "string"
+        example: "1"
+      tipoNotificacion:
+        type: "string"
+        example: "1"
+      from:
+        type: "string"
+        example: "q@r"
+      to:
+        type: "string"
+        example: "e@w"
+      mapParameters:
+        $ref: "#/definitions/envioNotificacionesin_mapParameters"
+      canal:
+        type: "string"
+        example: "1"
+        minLength: 1
+        maxLength: 5        
+        
+        
+        
+  envioNotificacionesin_mapParameters:
+    properties:
+      key:
+        type: "string"
+        example: "1223333"
+        
+        
+  
+  consultaCuentasAgregadasCliente-res:
+    properties:
+      listCuentasCliente:
+        type: "array"
+        items:
+          $ref: "#/definitions/consultaCuentasAgregadasCliente-res-array"
+      listCreditosCliente:
+        type: "array"
+        items:
+          $ref: "#/definitions/consultaCuentasAgregadasCliente-res-array"
+      listInversionesCliente:
+        type: "array"
+        items:
+          $ref: "#/definitions/consultaCuentasAgregadasCliente-res-array"
+      responseStatus:
+        type: "string"
+        example: "string"
+      responseError:
+        type: "string"
+        example: "string"
+        
+  consultaCuentasAgregadasCliente-res-array:
+    properties:
+      numeroDeCuenta:
+        type: "string"
+        example: "string"
+      idProducto:
+        type: "string"
+        example: "string"
+      descripcionProducto:
+        type: "string"
+        example: "string"
+      divisa:
+        type: "string"
+        example: "string"
+      saldo:
+        type: "string"
+        example: "Big Decimal"
+      idSucursal:
+        type: "string"
+        example: "integer"
+      nombreSucursal:
+        type: "string"
+        example: "string"
+
+        
+  
+
+  cambioContrasena-in:
+    required:
+    - "canal"
+    - "idPersona"
+    - "newPassword"
+    - "oldPassword"
+    - "otp"
+    properties:
+      idPersona:
+        type: "string"
+        example: "1222"
+      ticket:
+        $ref: "#/definitions/cambioContrasenain_ticket"
+      canal:
+        type: "string"
+        example: "1"
+      otp:
+        type: "string"
+        example: "otp"
+      oldPassword:
+        type: "string"
+        example: "123"
+      newPassword:
+        type: "string"
+        example: "123"
+        
+        
+  cambioContrasena-in-v1:
+    required:
+    - "confirmNewPassword"
+    - "idPersona"
+    - "token"
+    - "newPassword"
+    - "oldPassword"
+    - "otp"
+    properties:
+      idPersona:
+        type: "string"
+        example: "123"
+      token:
+        type: "string"
+        example: "87897"        
+      confirmNewPassword:
+        type: "string"
+        example: "1"
+      otp:
+        type: "string"
+        example: "1"
+      oldPassword:
+        type: "string"
+        example: "123"
+      newPassword:
+        type: "string"
+        example: "123"        
+        
+        
+  cambioContrasenain_ticket:
+    properties:
+      id_user:
+        type: "string"
+        example: "123"
+      id_creds:
+        type: "string"
+        example: "123"
+        
+        
+  cambioContrasena-res:
+    properties:
+      listCambioContrasena:
+        $ref: "#/definitions/cambioContrasenares_listCambioContrasena"
+        
+  cambioContrasenares_listCambioContrasena:
+    properties:
+      codigo:
+        type: "string"
+        example: "integer"
+      mensaje:
+        type: "string"
+        example: "string"
+
+
+
+
+
+
+
   ValidacontratoMiddleware-in:
     properties:
       token:
@@ -211,14 +668,18 @@ definitions:
     
         
         
+        
+        
+        
   Validacontrato-in:
     properties:
-      Usuario:
-        type: "string"
-        example: "4333534"
       ContratoAceptado:
         type: "integer"
         example: 1
+      token:
+        type: "integer"
+        example: 1
+      
         
   Validacontrato-res:
     properties:
@@ -242,6 +703,14 @@ definitions:
         maxLength: 5
         example: "CUBA1234575SDF"
         
+  consultaProductosContratados-in-v1:
+    required:
+      - token 
+    properties:
+      token:
+        type: "string"
+        example: "1025478963"        
+        
   consultaProductosContratados-res:
     required:
       - responseStatus
@@ -257,14 +726,15 @@ definitions:
         type: "string"
         example: "String"
         
+        
   consultaProductosContratadosticket:
     properties:
       id_user:
         type: "string"
-        example: ""
+        example: "123"
       id_creds:
         type: "string"
-        example: ""
+        example: "321"
         
   Validaotp-res:
      properties:
@@ -476,5 +946,3 @@ definitions:
         example: "String"
      
  
-
-  
