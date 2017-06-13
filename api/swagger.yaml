@@ -121,8 +121,7 @@ paths:
           $ref: "#/definitions/cambioContrasena-in"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada"
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
@@ -130,8 +129,7 @@ paths:
     post:
       tags:
       - "ESB Fuse"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. "
+      description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada. "
       operationId: "consultaCuentasAgregadasClientePOST"
       parameters:
       - in: "body"
