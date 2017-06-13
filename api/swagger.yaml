@@ -392,16 +392,31 @@ paths:
           description: 'El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
           required: true
           type: integer
+      
+        - in: "body"
+          name: "cookie"
+          description: "cookie valida generada por TAM"
+          required: true
+          schema:
+            $ref: "#/definitions/login-in-v1"
         
        
       responses:
           '200':
             description: 'Valida la estructura del archivo que se adjunta'
             schema:
-              $ref: '#/definitions/todo-res'
+              $ref: '#/definitions/login-res'
  
 definitions:
-  todo-res:
+
+  login-in-v1:
+    properties:
+      cookie:
+        type: "string"
+        example: "string"
+      
+
+  login-res:
     properties:
       consultaDatosBasicos:
          type: "array"
