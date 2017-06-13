@@ -41,7 +41,7 @@ paths:
         name: "consultaServiciosContratados"
         description: "Devuelve un listado de los servicios existentes para personas morales, indicando cuales de ellos han sido contratados por la persona proporcionada"
         required: true
-        schema:
+        schema: 
           $ref: "#/definitions/consultaServiciosContratados-in"
       responses:
         200:
