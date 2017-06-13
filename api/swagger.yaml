@@ -401,22 +401,14 @@ paths:
             description: 'Valida la estructura del archivo que se adjunta'
             schema:
               $ref: '#/definitions/todo-res'
-
-        
-       
-  
-  
- 
-
-  
  
 definitions:
   todo-res:
     properties:
-      ValidacontratoMiddleware:
+      consultaDatosBasicos:
          type: "array"
          items:
-          $ref: "#/definitions/consultaDatosBasicos-res"
+          $ref: "#/definitions/consultaDatosBasicos-Login-res"
           
       consultaServiciosContratados:
          type: "array"
@@ -427,17 +419,68 @@ definitions:
          type: "array"
          items:
           $ref: "#/definitions/consultaProductosContratados-res"
+          
+      consultaCuentasAgregadasCliente:
+         type: "array"
+         items:
+          $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
       
-      Validaotp:
+     
+          
+  consultaDatosBasicos-Login-res:
+    required:
+      - numCliente
+      - nombre
+      - fecha-ultimo-acceso
+      - mail
+    properties:
+      fecha-ultimo-acceso:
+        type: "string"
+        format: date
+        example: "date"
+      mail:
+        type: "string"
+        example: "string"
+      numCliente:
+        type: "integer"
+        format: "int64"
+        example: "Long"
+      nombre:
+        type: "string"
+        example: "String"
+      listaDirecciones:
          type: "array"
          items:
-          $ref: "#/definitions/Validaotp-res"
-          
-          
-      Validacontrato:
-         type: "array"
-         items:
-          $ref: "#/definitions/Validaotp-res"
+          $ref: "#/definitions/listaDeDirecciones"
+      rfc:
+        type: "string"
+        example: "String"
+      listaTelefonos:
+        type: "array"
+        items:
+          $ref: "#/definitions/listaDeTelefonos"
+      listaEmails:
+        type: "array"
+        items:
+          $ref: "#/definitions/listaDeEmail"
+      tipoPersona:
+        type: "string"
+        example: "String"
+      estatus:
+        type: "string"
+        example: "String"
+      sucursal:
+        type: "string"
+        example: "String"
+      vip:
+        type: "string"
+        example: "String"
+      responseStatus:
+        type: "string"
+        example: "String"
+      responseError:
+        type: "string"
+        example: "String"
           
 
   
@@ -824,8 +867,7 @@ definitions:
       
      
 
-
-  
+ 
   consultaDatosBasicos-in:
     required:
       - idPersona
