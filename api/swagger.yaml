@@ -905,9 +905,7 @@ definitions:
         example: "Integer"
       tipoTelefono:
         type: "string"
-        example: "String"
-    
-        
+        example: "String"  
         
   listaDeDirecciones:
     properties:
@@ -929,6 +927,3 @@ definitions:
       tipoDireccion:
         type: "string"
         example: "String"
-        
-     
- 
