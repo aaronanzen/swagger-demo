@@ -110,8 +110,7 @@ paths:
     post:
       tags:
       - "ESB Fuse"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. "
+      description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada. "
       parameters:
       - in: "body"
         name: "CambioContrasena"
@@ -140,8 +139,7 @@ paths:
           $ref: "#/definitions/consultaProductosContratados-in"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada."
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
@@ -149,8 +147,7 @@ paths:
     post:
       tags:
       - "ESB Fuse"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. "
+      description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada. "
       operationId: "envioNotificacionesPOST"
       parameters:
       - in: "body"
@@ -161,8 +158,7 @@ paths:
           $ref: "#/definitions/envioNotificaciones-in"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada."
           schema:
             $ref: "#/definitions/envioNotificaciones-res"
         
@@ -266,8 +262,7 @@ paths:
     post:
       tags:
       - "Middleware"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. "
+      description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada. "
       parameters:
       - in: "body"
         name: "CambioContrasena"
@@ -277,8 +272,7 @@ paths:
           $ref: "#/definitions/cambioContrasena-in-v1"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada."
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
@@ -286,8 +280,7 @@ paths:
     post:
       tags:
       - "Middleware"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. " 
+      description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada. " 
       parameters:
       - in: "body"
         name: "ConsultaCuentasAgregadasCliente"
@@ -297,8 +290,7 @@ paths:
           $ref: "#/definitions/consultaProductosContratados-in-v1"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada."
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
@@ -306,8 +298,7 @@ paths:
     post:
       tags:
       - "Middleware"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. " 
+      description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada. " 
       parameters:
       - in: "body"
         name: "EnvioNotificaciones"
@@ -317,20 +308,17 @@ paths:
           $ref: "#/definitions/envioNotificaciones-in-v1"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada."
           schema:
             $ref: "#/definitions/envioNotificaciones-res"
         
         
-  /v1/login:
+  /v1/accesoCliente:
     post:
       tags:
         - "Middleware"
-      description: 'Servicio que permite enviar un archivo comprimido (.ZIP) para ser persistido en base de datos'
+      description: 'La página de inicio de sesión podrá utilizar esta información para iniciar sesión'
       consumes:
-        - multipart/form-data
-      produces:
         - application/json
       parameters:
         - name: iv-user
@@ -392,45 +380,28 @@ paths:
           description: 'El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
           required: true
           type: integer
+      
+        - in: "body"
+          name: "banderaAcceso"
+          description: "cookie valida generada por TAM"
+          required: true
+          schema:
+            $ref: "#/definitions/login-in-v1"
         
        
       responses:
           '200':
             description: 'Valida la estructura del archivo que se adjunta'
             schema:
-              $ref: '#/definitions/todo-res'
+              $ref: '#/definitions/login-res'
  
 definitions:
-  todo-res:
+  login-in-v1:
     properties:
-      consultaDatosBasicos:
-         type: "array"
-         items:
-          $ref: "#/definitions/consultaDatosBasicos-Login-res"
-          
-      consultaServiciosContratados:
-         type: "array"
-         items:
-          $ref: "#/definitions/consultaServiciosContratados-res"
-          
-      consultaProductosContratados:
-         type: "array"
-         items:
-          $ref: "#/definitions/consultaProductosContratados-res"
-          
-      consultaCuentasAgregadasCliente:
-         type: "array"
-         items:
-          $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
-      
-     
-          
-  consultaDatosBasicos-Login-res:
-    required:
-      - numCliente
-      - nombre
-      - fecha-ultimo-acceso
-      - mail
+      banderaAcceso:
+        type: "string"
+        example: "1"
+  login-res:
     properties:
       fecha-ultimo-acceso:
         type: "string"
@@ -446,42 +417,16 @@ definitions:
       nombre:
         type: "string"
         example: "String"
-      listaDirecciones:
+      consultaServiciosContratados:
          type: "array"
          items:
-          $ref: "#/definitions/listaDeDirecciones"
-      rfc:
-        type: "string"
-        example: "String"
-      listaTelefonos:
-        type: "array"
-        items:
-          $ref: "#/definitions/listaDeTelefonos"
-      listaEmails:
-        type: "array"
-        items:
-          $ref: "#/definitions/listaDeEmail"
-      tipoPersona:
-        type: "string"
-        example: "String"
-      estatus:
-        type: "string"
-        example: "String"
-      sucursal:
-        type: "string"
-        example: "String"
-      vip:
-        type: "string"
-        example: "String"
-      responseStatus:
-        type: "string"
-        example: "String"
-      responseError:
-        type: "string"
-        example: "String"
+          $ref: "#/definitions/consultaServiciosContratados-res"
           
-
-  
+      consultaProductosContratados:
+         type: "array"
+         items:
+          $ref: "#/definitions/consultaProductosContratados-res"
+ 
   envioNotificaciones-res:
     properties:
       responseStatus:
@@ -960,9 +905,7 @@ definitions:
         example: "Integer"
       tipoTelefono:
         type: "string"
-        example: "String"
-    
-        
+        example: "String"  
         
   listaDeDirecciones:
     properties:
@@ -984,6 +927,3 @@ definitions:
       tipoDireccion:
         type: "string"
         example: "String"
-        
-     
- 
