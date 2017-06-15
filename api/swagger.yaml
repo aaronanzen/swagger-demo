@@ -306,106 +306,65 @@ paths:
             $ref: "#/definitions/envioNotificaciones-res"
         
         
-  /v1/login:
+  /v1/accesoCliente:
     post:
       tags:
         - "Middleware"
-      description: 'Servicio que permite enviar un archivo comprimido (.ZIP) para ser persistido en base de datos'
+      description: 'La página de inicio de sesión podrá utilizar esta información para iniciar sesión'
       consumes:
-        - multipart/form-data
-      produces:
         - application/json
       parameters:
-        - name: iv-user
-          in: header
-          description: 'Nombre del usuario autenticado (numérico y tempralmete con algunos alfanuméricos)'
-          required: true
-          type: integer
-          
-        - name: iv-creds
-          in: header
-          description: 'Elemento con la representación en base64 de la credencial de usuario de TAM. Se requiere para algunas operaciones de los Servicios de Seguridad.'
-          required: true
-          type: integer
-          
-        - name: iv-groups
-          in: header
-          description: 'Lista separada por comas de los grupos de TAM/LDAP a los que pertenece el usuario.'
-          required: true
-          type: integer
-        
-        - name: numero-cliente
-          in: header
-          description: 'El dato de NumeroCliente del usuario (numero de 10 digitos).'
-          required: true
-          type: integer
-          
-        - name: nombre-completo
-          in: header
-          description: 'El dato de nombre completo del usuario. Almacenado en LDAP como el atributo CN, en el caso de Persona Física es el nombre completo, en el caso de Persona Moral se trata de la razón social.'
-          required: true
-          type: integer
-          
-        - name: tipo-authenticacion
-          in: header
-          description: 'El tipo de autenticación que se realizó con el Token. Generado por el módulo de autenticación de token, puede ser RO (ResponseOnly) o CR (Challenge/Response), dependiendo del tipo de autenticación realizado'
-          required: true
-          type: integer
-          
-        - name: contratoAceptado
-          in: header
-          description: 'El dato de primerAcceso del usuario.'
-          required: true
-          type: integer
-          
-        - name: fechaUltimoAcceso
-          in: header
-          description: 'El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server.'
-          required: true
-          type: integer
-          
-        - name: Tipocanal
-          in: header
-          description: 'El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
-          required: true
-          type: integer
-          
-        - name: mail
-          in: header
-          description: 'El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
-          required: true
-          type: integer
+        - in: "body"
+          name: "banderaAcceso"
+          description: "cookie valida generada por TAM"
+          required: false
+          schema:
+            $ref: "#/definitions/login-in-v1"
         
        
       responses:
           '200':
-            description: 'Valida la estructura del archivo que se adjunta'
+            description: 'Validacion de bandera Acceso, vendran valores por cabecera'
             schema:
-              $ref: '#/definitions/todo-res'
+              $ref: '#/definitions/login-res'
  
 definitions:
-  todo-res:
+  login-in-v1:
     properties:
+      banderaAcceso:
+        type: "string"
+        example: "1"
+  login-res:
+    properties:
+      fechaUltimoAcceso:
+        type: "string"
+        format: date
+        example: "date"
+      nombreUsuario:
+        type: "string"
+        example: "String"
+      fechaHoraAcceso:
+        type: "string"
+        format: "date"
+        example: "Date"
+      ultimoAcceso:
+        type: "string"
+        example: "string"
+      mail:
+        type: "string"
+        example: "string"
+      canal:
+        type: "string"
+        example: "string"
       consultaDatosBasicos:
          type: "array"
          items:
-          $ref: "#/definitions/consultaDatosBasicos-Login-res"
-          
+          $ref: "#/definitions/consultaDatosBasicos-res"
+        
       consultaServiciosContratados:
          type: "array"
          items:
           $ref: "#/definitions/consultaServiciosContratados-res"
-          
-      consultaProductosContratados:
-         type: "array"
-         items:
-          $ref: "#/definitions/consultaProductosContratados-res"
-          
-      consultaCuentasAgregadasCliente:
-         type: "array"
-         items:
-          $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
-      
      
           
   consultaDatosBasicos-Login-res:
