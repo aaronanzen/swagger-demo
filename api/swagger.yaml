@@ -403,17 +403,13 @@ definitions:
       nombreUsuario:
         type: "string"
         example: "String"
-      fechaHoraAcceso:
-        type: "string"
-        format: "date"
-        example: "Date"
       medioAcceso:
         type: "string"
         example: "string"
       mail:
         type: "string"
         example: "string"
-      canal:
+      tipoCanal:
         type: "string"
         example: "string"
       consultaDatosBasicos:
