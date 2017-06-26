@@ -1008,4 +1008,4 @@ definitions:
       tipoTelefono:
         type: "string"
         example: "String" 
-litsa
+
