@@ -547,7 +547,7 @@ definitions:
         $ref: "#/definitions/cambioContrasenain_ticket"
       canal:
         type: "string"
-        example: "1"
+        example: "String"
         minLength: 1
         maxLength: 5
         
@@ -580,6 +580,7 @@ definitions:
     - "tokenStatus"
     properties:
       usuario:
+        maxLength: 14
         type: "string"
         example: "string"
       tokenSerial:
