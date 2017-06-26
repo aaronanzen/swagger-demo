@@ -216,6 +216,32 @@ paths:
           schema:
             $ref: "#/definitions/bloqueoOTP-res"
             
+            
+            
+            
+            
+  /consultaPerfiles:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Sin Descripción"
+      parameters:
+      - in: "body"
+        name: "facultadesSimples,"
+        description: "Nos va a traer facultades Simples"
+        required: true
+        schema:
+          $ref: "#/definitions/facultades-simples-in"
+      responses:
+        200:
+          description: "Nos va a traer facultades Simples"
+          schema:
+            $ref: "#/definitions/facultades-simples-res"
+        403:
+          description: "Nos va a traer un error"
+          schema:
+            $ref: "#/definitions/facultades-simples-error"
+            
 
             
   /v1/cambioContrasena:
@@ -353,6 +379,64 @@ paths:
         
  
 definitions:
+  facultades-simples-in:
+    required:
+      - idPersona
+      - canal
+      - ticket
+      - nombreSistema
+    properties:
+      idPersona:
+        type: "string" 
+        example: "123456"
+      canal:
+        type: "string"
+        example: "MVNET"
+      ticket:
+         $ref: "#/definitions/ticket-facultades-simples"
+      nombreSistema:
+        type: "string"
+        example: ""
+       
+  
+  facultades-simples-res:
+    properties:
+      facultadesSimples:
+        type: array
+        items:
+          type: string
+          example: ""
+      responseStatus:
+        type: "string"
+        example: "String"
+      responseError:
+        type: "string"
+        example: "String" 
+  
+  facultades-simples-error:
+    properties:
+      facultadesSimples:
+        type: "string"
+        example: []
+      responseStatus:
+        type: integer
+        example: 6500
+      responseError:
+        type: "string"
+        example: "Sistema fuera de linea"        
+   
+   
+        
+  ticket-facultades-simples:
+    properties:
+      id_use:
+        type: "string"
+        example: "123456"
+      id_creds:
+        type: "string"
+        example: "QWERTY"
+
+#-------------------------------------------------------------------------------
   bloqueoOTP-in:
     required:
     - "canal"
@@ -842,9 +926,6 @@ definitions:
       id_creds:
         type: "string"
         example: ""
-  
-  
-  
   
   ticket:
     required:
