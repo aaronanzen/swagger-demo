@@ -405,7 +405,7 @@ definitions:
         type: array
         items:
           type: string
-          example: ""
+          example: "String"
       responseStatus:
         type: "string"
         example: "String"
