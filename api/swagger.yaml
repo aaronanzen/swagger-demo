@@ -387,8 +387,9 @@ definitions:
       - nombreSistema
     properties:
       idPersona:
-        type: "string" 
-        example: "123456"
+        type: "integer"
+        format: int64
+        example: "1234"
       canal:
         type: "string"
         example: "MVNET"
@@ -407,8 +408,9 @@ definitions:
           type: string
           example: "String"
       responseStatus:
-        type: "string"
-        example: "String"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         type: "string"
         example: "String" 
@@ -643,8 +645,9 @@ definitions:
         example: "String"
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: "string"
-        example: "String"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
@@ -667,8 +670,9 @@ definitions:
     properties:
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: "string"
-        example: "string"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
@@ -734,8 +738,9 @@ definitions:
           $ref: "#/definitions/consultaCuentasAgregadasCliente-res-array"
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: "string"
-        example: "string"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
@@ -853,8 +858,9 @@ definitions:
         $ref: "#/definitions/cambioContrasenares_listCambioContrasena"
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: integer
-        example: "String"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
@@ -918,8 +924,9 @@ definitions:
           $ref: "#/definitions/ServiciosContratadosListaServicios"
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: integer
-        example: "String"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
@@ -1012,14 +1019,7 @@ definitions:
          items:
           $ref: "#/definitions/ServiciosContratadosListaServicios"
           
-      responseStatus:
-        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: "string"
-        example: "String"
-      responseError:
-        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
-        type: "string"
-        example: "String"
+
 
       
      
@@ -1105,8 +1105,9 @@ definitions:
       
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: "string"
-        example: "String"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
