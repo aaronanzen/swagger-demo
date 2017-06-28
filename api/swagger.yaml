@@ -387,16 +387,21 @@ definitions:
       - nombreSistema
     properties:
       idPersona:
-        type: "string" 
-        example: "123456"
+        type: "integer"
+        format: int64
+        example: "1234"
+        description: 'Identificador único de la persona solicitante.'
       canal:
         type: "string"
         example: "MVNET"
+        description: 'Identificador del canal a través del cual se recibió la petición. Se utilizarán los identificadores de canal definidos por T24.'
       ticket:
          $ref: "#/definitions/ticket-facultades-simples"
+         description: 'Ticket representativo de la sesión del cliente.'
       nombreSistema:
         type: "string"
         example: ""
+        description: 'Referencia que el código deberá usar para referirse al aplicativo que representa. Multivanet Se utilizará la constante MULTIVANET'
        
   
   facultades-simples-res:
@@ -406,12 +411,16 @@ definitions:
         items:
           type: string
           example: "String"
+          description: 'Lista de nombres de facultades simples asociadas con el usuario consultado.'
       responseStatus:
-        type: "string"
-        example: "String"
+        type: "integer"
+        format: int64
+        example: "long"
+        description: 'Código de respuesta del servicio. 200 Representa una ejecución exitosa.'
       responseError:
         type: "string"
         example: "String" 
+        description: 'Mensaje de error, si aplica. Si se trata de una ejecución exitosa, este mensaje va vacío en la respuesta.'
   
   facultades-simples-error:
     properties:
@@ -432,9 +441,11 @@ definitions:
       id_use:
         type: "string"
         example: "123456"
+        description: 'Usuario logeado, idealmente debería ser el idPersona.Mensaje de error, si aplica. Si se trata de una ejecución exitosa, este mensaje va vacío en la respuesta.'
       id_creds:
         type: "string"
         example: "QWERTY"
+        description: 'Cadena representativa de la sesión del usuario logeado.'
 
 #-------------------------------------------------------------------------------
   bloqueoOTP-in:
@@ -723,8 +734,9 @@ definitions:
         example: "String"
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: "string"
-        example: "String"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
@@ -747,8 +759,9 @@ definitions:
     properties:
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: "string"
-        example: "string"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
@@ -814,8 +827,9 @@ definitions:
           $ref: "#/definitions/consultaCuentasAgregadasCliente-res-array"
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: "string"
-        example: "string"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
@@ -933,8 +947,9 @@ definitions:
         $ref: "#/definitions/cambioContrasenares_listCambioContrasena"
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: integer
-        example: "String"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
@@ -998,8 +1013,9 @@ definitions:
           $ref: "#/definitions/ServiciosContratadosListaServicios"
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: integer
-        example: "String"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
@@ -1092,14 +1108,7 @@ definitions:
          items:
           $ref: "#/definitions/ServiciosContratadosListaServicios"
           
-      responseStatus:
-        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: "string"
-        example: "String"
-      responseError:
-        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
-        type: "string"
-        example: "String"
+
 
       
      
@@ -1185,8 +1194,9 @@ definitions:
       
       responseStatus:
         description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
-        type: "string"
-        example: "String"
+        type: "integer"
+        format: int64
+        example: "long"
       responseError:
         description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
