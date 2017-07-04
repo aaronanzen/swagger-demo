@@ -243,7 +243,7 @@ paths:
             
 
             
-  /v1/autenticacion/cambioContrasena:
+  /autenticacion/cambioContrasena:
     post:
       tags:
       - "Middleware"
@@ -291,7 +291,7 @@ paths:
             $ref: "#/definitions/envioNotificaciones-res"
         
         
-  /v1/autenticacion/accesoCliente:
+  /autenticacion/accesoCliente:
     post:
       tags:
         - "Middleware"
