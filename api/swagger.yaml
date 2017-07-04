@@ -12,7 +12,7 @@ tags:
     description: "Servicios Multiva"
     url: "http://200.39.24.141:9090/docs"
 paths:
-  /consultaDatosBasicos:
+  /BEO/consultaDatosBasicos:
     post:
       tags:
       - "ESB Fuse"
@@ -30,7 +30,7 @@ paths:
           schema:
             $ref: "#/definitions/consultaDatosBasicos-fuse-res"
             
-  /consultaServiciosContratados:
+  /BEO/consultaServiciosContratados:
     post:
       tags:
       - "ESB Fuse"
@@ -48,7 +48,7 @@ paths:
           schema:
             $ref: "#/definitions/consultaServiciosContratados-res"
             
-  /consultaProductosContratados:
+  /BEO/consultaProductosContratados:
     post:
       tags:
       - "ESB Fuse"
@@ -65,7 +65,7 @@ paths:
           description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada"
           schema:
             $ref: "#/definitions/consultaProductosContratados-res"
-  /Validaotp:
+  /BEO/Validaotp:
     post:
       tags:
       - "ESB Fuse"
@@ -85,7 +85,7 @@ paths:
         
  
             
-  /Validacontrato:
+  /BEO/Validacontrato:
     post:
       tags:
       - "ESB Fuse"
@@ -105,7 +105,7 @@ paths:
             
             
             
-  /cambioContrasena:
+  /BEO/cambioContrasena:
     post:
       tags:
       - "ESB Fuse"
@@ -123,7 +123,7 @@ paths:
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
-  /consultaCuentasAgregadasCliente:
+  /BEO/consultaCuentasAgregadasCliente:
     post:
       tags:
       - "ESB Fuse"
@@ -142,7 +142,7 @@ paths:
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
-  /envioNotificaciones:
+  /BEO/envioNotificaciones:
     post:
       tags:
       - "ESB Fuse"
@@ -161,7 +161,7 @@ paths:
           schema:
             $ref: "#/definitions/envioNotificaciones-res"
             
-  /listarTokensOTP:
+  /BEO/listarTokensOTP:
     post:
       tags:
       - "ESB Fuse"
@@ -179,7 +179,7 @@ paths:
           schema:
             $ref: "#/definitions/listarTokensOTP-res"
             
-  /activacionOTP:
+  /BEO/activacionOTP:
     post:
       tags:
       - "ESB Fuse"
@@ -197,7 +197,7 @@ paths:
           schema:
             $ref: "#/definitions/activacionOTP-res"
             
-  /bloqueoOTP:
+  /BEO/bloqueoOTP:
     post:
       tags:
       - "ESB Fuse"
@@ -219,7 +219,7 @@ paths:
             
             
             
-  /consultaPerfiles:
+  /BEO/consultaPerfiles:
     post:
       tags:
       - "ESB Fuse"
@@ -243,7 +243,7 @@ paths:
             
 
             
-  /v1/cambioContrasena:
+  /v1/autenticacion/cambioContrasena:
     post:
       tags:
       - "Middleware"
@@ -261,7 +261,7 @@ paths:
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
-  /v1/consultaCuentas:
+  /BEO/v1/consultaCuentas:
     post:
       tags:
       - "Middleware"
@@ -272,7 +272,7 @@ paths:
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
-  /v1/envioNotificaciones:
+  /BEO/v1/envioNotificaciones:
     post:
       tags:
       - "Middleware"
@@ -291,7 +291,7 @@ paths:
             $ref: "#/definitions/envioNotificaciones-res"
         
         
-  /v1/accesoCliente:
+  /v1/autenticacion/accesoCliente:
     post:
       tags:
         - "Middleware"
