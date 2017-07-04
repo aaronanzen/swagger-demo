@@ -5,7 +5,6 @@ info:
   version: "0.1.0"
   title: "Grupo Financiero Multiva"
 host: "200.39.24.141"
-basePath: "/BEO"
 tags:
 - name: ""
   description: "Grupo Financiero Multiva"
