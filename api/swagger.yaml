@@ -747,6 +747,12 @@ definitions:
           $ref: "#/definitions/listaDeTelefonos"
       consultaServiciosContratados:
           $ref: "#/definitions/consultaServiciosContratados-res"
+      facultadesSimples:
+        type: array
+        items:
+          type: string
+          example: "String"
+          description: 'Lista de nombres de facultades simples asociadas con el usuario consultado.'
       
      
           
