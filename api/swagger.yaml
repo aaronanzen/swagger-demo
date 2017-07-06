@@ -254,27 +254,63 @@ paths:
       consumes:
         - application/json
       parameters:
-        - name: idPersona
+        - name: iv-user
           in: header
-          description: '(Header de idPersona)'
+          description: '(Header de NoLogin) Nombre del usuario autenticado (numérico y tempralmete con algunos alfanuméricos)'
           required: true
           type: integer
           
-        - name: canal
+        - name: iv-creds
           in: header
-          description: '(Header de canal)'
+          description: '(Header de NoLogin) Elemento con la representación en base64 de la credencial de usuario de TAM. Se requiere para algunas operaciones de los Servicios de Seguridad.'
           required: true
           type: integer
           
-        - name: id_user
+        - name: iv-groups
           in: header
-          description: '(Header de id_user)'
+          description: '(Header de NoLogin) Lista separada por comas de los grupos de TAM/LDAP a los que pertenece el usuario.'
+          required: true
+          type: integer
+        
+        - name: numero-cliente
+          in: header
+          description: '(Header de NoLogin) El dato de NumeroCliente del usuario (numero de 10 digitos).'
           required: true
           type: integer
           
-        - name: id_creds
+        - name: nombre-completo
           in: header
-          description: '(Header de id_creds)'
+          description: '(Header de NoLogin) El dato de nombre completo del usuario. Almacenado en LDAP como el atributo CN, en el caso de Persona Física es el nombre completo, en el caso de Persona Moral se trata de la razón social.'
+          required: true
+          type: integer
+          
+        - name: tipo-authenticacion
+          in: header
+          description: '(Header de NoLogin)  El tipo de autenticación que se realizó con el Token. Generado por el módulo de autenticación de token, puede ser RO (ResponseOnly) o CR (Challenge/Response), dependiendo del tipo de autenticación realizado'
+          required: true
+          type: integer
+          
+        - name: contratoAceptado
+          in: header
+          description: '(Header de NoLogin) El dato de primerAcceso del usuario.'
+          required: true
+          type: integer
+          
+        - name: fechaUltimoAcceso
+          in: header
+          description: '(Header de NoLogin) El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server.'
+          required: true
+          type: integer
+          
+        - name: Tipocanal
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
+        - name: mail
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
           required: true
           type: integer
           
@@ -295,7 +331,70 @@ paths:
     post:
       tags:
       - "Middleware"
-      description: "Interfaz  que le permitira consultar informacion de las cuentas agregadas de los clientes desde el core bancario T24 de Multiva. "  
+      description: "Interfaz  que le permitira consultar informacion de las cuentas agregadas de los clientes desde el core bancario T24 de Multiva. "
+      consumes:
+        - application/json
+      parameters:
+        - name: iv-user
+          in: header
+          description: '(Header de NoLogin) Nombre del usuario autenticado (numérico y tempralmete con algunos alfanuméricos)'
+          required: true
+          type: integer
+          
+        - name: iv-creds
+          in: header
+          description: '(Header de NoLogin) Elemento con la representación en base64 de la credencial de usuario de TAM. Se requiere para algunas operaciones de los Servicios de Seguridad.'
+          required: true
+          type: integer
+          
+        - name: iv-groups
+          in: header
+          description: '(Header de NoLogin) Lista separada por comas de los grupos de TAM/LDAP a los que pertenece el usuario.'
+          required: true
+          type: integer
+        
+        - name: numero-cliente
+          in: header
+          description: '(Header de NoLogin) El dato de NumeroCliente del usuario (numero de 10 digitos).'
+          required: true
+          type: integer
+          
+        - name: nombre-completo
+          in: header
+          description: '(Header de NoLogin) El dato de nombre completo del usuario. Almacenado en LDAP como el atributo CN, en el caso de Persona Física es el nombre completo, en el caso de Persona Moral se trata de la razón social.'
+          required: true
+          type: integer
+          
+        - name: tipo-authenticacion
+          in: header
+          description: '(Header de NoLogin)  El tipo de autenticación que se realizó con el Token. Generado por el módulo de autenticación de token, puede ser RO (ResponseOnly) o CR (Challenge/Response), dependiendo del tipo de autenticación realizado'
+          required: true
+          type: integer
+          
+        - name: contratoAceptado
+          in: header
+          description: '(Header de NoLogin) El dato de primerAcceso del usuario.'
+          required: true
+          type: integer
+          
+        - name: fechaUltimoAcceso
+          in: header
+          description: '(Header de NoLogin) El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server.'
+          required: true
+          type: integer
+          
+        - name: Tipocanal
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
+        - name: mail
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
       responses:
         200:
           description: "Devuelve un listado de cuentas, inversiones y credito, existentes de la persona proporcionada."
@@ -306,14 +405,76 @@ paths:
     post:
       tags:
       - "Middleware"
-      description: "Interfaz  que le permitirá a un usuario o sistema enviar notifiaciones de varios tipos." 
+      description: "Interfaz  que le permitirá a un usuario o sistema enviar notifiaciones de varios tipos."
+      consumes:
+        - application/json
       parameters:
-      - in: "body"
-        name: "EnvioNotificaciones"
-        description: " Consulta Productos Contratadose"
-        required: true
-        schema:
-          $ref: "#/definitions/envioNotificaciones-in"
+        - name: iv-user
+          in: header
+          description: '(Header de NoLogin) Nombre del usuario autenticado (numérico y tempralmete con algunos alfanuméricos)'
+          required: true
+          type: integer
+          
+        - name: iv-creds
+          in: header
+          description: '(Header de NoLogin) Elemento con la representación en base64 de la credencial de usuario de TAM. Se requiere para algunas operaciones de los Servicios de Seguridad.'
+          required: true
+          type: integer
+          
+        - name: iv-groups
+          in: header
+          description: '(Header de NoLogin) Lista separada por comas de los grupos de TAM/LDAP a los que pertenece el usuario.'
+          required: true
+          type: integer
+        
+        - name: numero-cliente
+          in: header
+          description: '(Header de NoLogin) El dato de NumeroCliente del usuario (numero de 10 digitos).'
+          required: true
+          type: integer
+          
+        - name: nombre-completo
+          in: header
+          description: '(Header de NoLogin) El dato de nombre completo del usuario. Almacenado en LDAP como el atributo CN, en el caso de Persona Física es el nombre completo, en el caso de Persona Moral se trata de la razón social.'
+          required: true
+          type: integer
+          
+        - name: tipo-authenticacion
+          in: header
+          description: '(Header de NoLogin)  El tipo de autenticación que se realizó con el Token. Generado por el módulo de autenticación de token, puede ser RO (ResponseOnly) o CR (Challenge/Response), dependiendo del tipo de autenticación realizado'
+          required: true
+          type: integer
+          
+        - name: contratoAceptado
+          in: header
+          description: '(Header de NoLogin) El dato de primerAcceso del usuario.'
+          required: true
+          type: integer
+          
+        - name: fechaUltimoAcceso
+          in: header
+          description: '(Header de NoLogin) El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server.'
+          required: true
+          type: integer
+          
+        - name: Tipocanal
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
+        - name: mail
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
+        - in: "body"
+          name: "EnvioNotificaciones"
+          description: " Consulta Productos Contratadose"
+          required: true
+          schema:
+            $ref: "#/definitions/envioNotificaciones-in"
       responses:
         200:
           description: "Representa una ejecución exitosa. Para efectos de este servicio, será indicativo de que la notificación solicitada se envió correctamente."
