@@ -251,13 +251,40 @@ paths:
       tags:
       - "Middleware"
       description: "Interfaz  que le permitira cambiar la informacion de contraseña de un usuario activo en el sistema TAM de Multiva."
+      consumes:
+        - application/json
       parameters:
-      - in: "body"
-        name: "CambioContrasena"
-        description: " cambio de Contrasena"
-        required: true
-        schema:
-          $ref: "#/definitions/cambioContrasena-in-v1"
+        - name: idPersona
+          in: header
+          description: '(Header de idPersona)'
+          required: true
+          type: integer
+          
+        - name: canal
+          in: header
+          description: '(Header de canal)'
+          required: true
+          type: integer
+          
+        - name: id_user
+          in: header
+          description: '(Header de id_user)'
+          required: true
+          type: integer
+          
+        - name: id_creds
+          in: header
+          description: '(Header de id_creds)'
+          required: true
+          type: integer
+          
+        - in: "body"
+          name: "CambioContrasena"
+          description: " cambio de Contrasena"
+          required: true
+          schema:
+            $ref: "#/definitions/cambioContrasena-in-v1"
+          
       responses:
         200:
           description: "Cambia la contraseña existente por una nueva en el sistema TAM de la persona proporcionada."
